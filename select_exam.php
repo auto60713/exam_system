@@ -18,8 +18,10 @@
   left:2%;
 
  }
-</style> 
  
+ h4{word-break:keep-all;white-space:nowrap;}
+</style> 
+
 <body>
 <?php
 include("mysql_connect.inc.php");
@@ -29,7 +31,7 @@ $result = mysql_query($sql);
 $row = @mysql_fetch_row($result);
 
 
-echo '<h4>會員首頁</h4>';
+echo '<h4>考試首頁</h4>';
 
 
 
@@ -41,41 +43,45 @@ if($_SESSION['userID'] != null)
 {
        
 
+		echo '<form action="exam.php" method="post" name="form1">'; 
+	    echo '　　<a href="member.php">上一頁</a>　　　'; 
+        echo '<input name="startexam" type="submit" value="開始考試"><br><br>';
+		echo '</form>'; 
 
-	    echo '　　<a href="logout.php">登出</a>　　　'; 
-        echo '　　<a href="select_exam.php">準備考試</a>　　　<br><br><br>'; 
 		
 		echo '<div class="show">';
         echo '你好!　'.$row[0].'<br>';
       
 		
 		
-	    echo  "<h3>歷屆考試成績：<br></h3>";
+	    echo  "<h3>請選擇考試項目：<br></h3>";
 				
     
         //將資料庫裡的考試資料顯示在畫面上
-        $sql = "SELECT * FROM score where userID = '$id' ORDER BY NO DESC;";
+        $sql = "SELECT * FROM exam";
         $result = mysql_query($sql);
 		
 		   echo "<table border='1'>";	
             echo "<tr>";
-		    echo "<th>考試代號</th><th>日期</th><th>名稱</th><th>答錯題數</th><th>分數</th>";
+		    echo "<th>日期</th><th>名稱</th><th>總類</th><th>題數</th>";
 			echo "</tr>";		
 
-        $i = 0;			
+        $i = 0;
+      		
         while($row = mysql_fetch_row($result))
         {
             echo "<tr>";
-		    echo "<td>$row[0]　</td><td>$row[2]　</td><td>$row[3]　</td><td>$row[4]　</td><td>$row[5]　</td>";
+		    echo "<td>$row[1]　</td><td><a href ='?select=$row[2]'>$row[2]</a>　</td><td>$row[3]　</td><td>$row[4]　</td>";
 			echo "</tr>";
-			
+		
 			//只顯示20筆資料
 			$i = $i+1;
 			if($i>20)
             exit;
   
         }
-	       echo "</table>";
+	       echo "</table><br>";
+		   echo "你選擇了　<h4>".$_GET['select']."</h4>";
 		   echo '</div>';
 }
 

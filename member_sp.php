@@ -33,17 +33,17 @@ if($_SESSION['userID'] != null && $_SESSION['super'] == 1)
 				
     
         //將資料庫裡的所有會員資料顯示在畫面上
-        $sql = "SELECT * FROM score";
+        $sql = "SELECT * FROM exam";
         $result = mysql_query($sql);
 		
 		   echo "<table border='1'>";	
             echo "<tr>";
-		    echo "<th>考試代號</th><th>日期</th><th>成員</th><th>名稱</th><th>答錯題數</th><th>分數</th>";
+		    echo "<th>考試代號</th><th>日期</th><th>名稱</th><th>總類</th><th>題數</th><th>狀態</th>";
 			echo "</tr>";		   
         while($row = mysql_fetch_row($result))
         {
             echo "<tr>";
-		    echo "<td>$row[0]　</td><td>$row[2]　</td><td>$row[3]　</td><td>$row[4]　</td><td>$row[5]　</td>";
+		    echo "<td>$row[0]　</td><td>$row[1]　</td><td>$row[2]　</td><td>$row[3]　</td><td>$row[4]　</td><td>$row[5]　</td>";
 			echo "</tr>";
         }
 	       echo "</table>";

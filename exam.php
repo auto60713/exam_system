@@ -33,7 +33,7 @@ include("mysql_connect.inc.php");
         $NO = 1;
 	    $_SESSION[ans] = array();
         //尾端數字是題目數量
-        $sql = "select * from exam order by RAND() limit 0,5";
+        $sql = "select * from question order by RAND() limit 0,5";
         $result = mysql_query($sql);
 		
 		echo "<form action='exam2.php' method='POST'>";
