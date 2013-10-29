@@ -4,6 +4,21 @@
 
 
 <html>
+
+<style>
+
+  div.show{
+  background-color:#AFD6FF; 
+  width:80%; 
+   
+  opacity: 0.8;
+  padding:15px;
+  position:relative; 
+  box-shadow: 8px 8px 10px #888888;
+  left:5%;
+ }
+</style> 
+
 <body>
 <?php
 if ($_POST["startexam"]=="開始考試") {
@@ -12,13 +27,13 @@ if ($_POST["startexam"]=="開始考試") {
 
 include("mysql_connect.inc.php");
 
-	 echo  "<h3>隨機題目：<br></h3>";
+	 echo  "<br><h2>　　隨機題目：</h2><br>";
 				
- 
+     echo '<div class="show">';
         $NO = 1;
 	    $_SESSION[ans] = array();
         //尾端數字是題目數量
-        $sql = "select * from exam order by RAND() limit 0,3";
+        $sql = "select * from exam order by RAND() limit 0,5";
         $result = mysql_query($sql);
 		
 		echo "<form action='exam2.php' method='POST'>";
@@ -27,7 +42,7 @@ include("mysql_connect.inc.php");
         {
                  echo 
 				   "
-				 題號".$NO."　序號 $row[0]　　$row[1]<br>
+				 <h4>第".$NO."題　$row[1]</h4>
 				<input type='radio' name='answer$NO'  value='1' />　$row[2]<br>
 			    <input type='radio' name='answer$NO'  value='2' />　$row[3]<br>
 			    <input type='radio' name='answer$NO'  value='3' />　$row[4]<br>
@@ -44,6 +59,7 @@ include("mysql_connect.inc.php");
 
      echo "<input type='submit' value='提交答案'>";
      echo "</form>";
+	 echo '</div><br><br>';
 }
 else
 {

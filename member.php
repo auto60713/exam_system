@@ -4,6 +4,22 @@
 
 
 <html>
+
+<style>
+ 
+  div.show{
+  background-color:#AFD6FF; 
+  width:90%; 
+  height:75%; 
+  opacity: 0.8;
+  padding:15px;
+  position:relative; 
+  box-shadow: 10px 10px 10px #888888;
+  left:2%;
+
+ }
+</style> 
+ 
 <body>
 <?php
 include("mysql_connect.inc.php");
@@ -24,11 +40,14 @@ echo '<h4>會員首頁</h4>';
 if($_SESSION['userID'] != null)
 {
        
-       
+
 		echo '<form action="exam.php" method="post" name="form1">'; 
-		 echo '<a href="logout.php">登出</a>　　　'; 
+	    echo '　　<a href="logout.php">登出</a>　　　'; 
         echo '<input name="startexam" type="submit" value="開始考試"><br><br>';
 		echo '</form>'; 
+
+		
+		echo '<div class="show">';
         echo '你好!　'.$row[0].'<br>';
       
 		
@@ -37,7 +56,7 @@ if($_SESSION['userID'] != null)
 				
     
         //將資料庫裡的所有會員資料顯示在畫面上
-        $sql = "SELECT * FROM score where userID = '$id'";
+        $sql = "SELECT * FROM score where userID = '$id' ORDER BY NO DESC;";
         $result = mysql_query($sql);
 		
 		   echo "<table border='1'>";	
@@ -51,7 +70,16 @@ if($_SESSION['userID'] != null)
 			echo "</tr>";
         }
 	       echo "</table>";
+		   echo '</div>';
 }
+
+
+
+
+
+
+
+
 else
 {
         echo '請先登入帳號密碼 ^_^';
