@@ -6,6 +6,10 @@
 <html>
 <body>
 <?php
+if ($_POST["startexam"]=="開始考試") {
+//考試授權
+
+
 include("mysql_connect.inc.php");
 
 	 echo  "<h3>隨機題目：<br></h3>";
@@ -37,10 +41,15 @@ include("mysql_connect.inc.php");
         }
 
 		
+
+     echo "<input type='submit' value='提交答案'>";
+     echo "</form>";
+}
+else
+{
+        echo '這不是正確的考試步驟喔 ^_^';
+        echo '<meta http-equiv=REFRESH CONTENT=3;url=home.php>';
+}
 ?>
-	<input type='submit' value='提交答案'>
-			 </form>
-
-
 </body>
 </html>

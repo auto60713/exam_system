@@ -29,16 +29,16 @@ if($_SESSION['userID'] != null && $_SESSION['super'] == 1)
       
 		
 		
-	    echo  "<h3>歷屆考試成績：<br></h3>";
+	    echo  "<h3>成員們的成績：<br></h3>";
 				
     
         //將資料庫裡的所有會員資料顯示在畫面上
-        $sql = "SELECT * FROM score where userID = '$id'";
+        $sql = "SELECT * FROM score";
         $result = mysql_query($sql);
 		
 		   echo "<table border='1'>";	
             echo "<tr>";
-		    echo "<th>考試代號</th><th>日期</th><th>名稱</th><th>答錯題數</th><th>分數</th>";
+		    echo "<th>考試代號</th><th>日期</th><th>成員</th><th>名稱</th><th>答錯題數</th><th>分數</th>";
 			echo "</tr>";		   
         while($row = mysql_fetch_row($result))
         {

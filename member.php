@@ -14,9 +14,7 @@ $row = @mysql_fetch_row($result);
 
 
 echo '<h4>會員首頁</h4>';
-echo '<a href="logout.php">登出</a>　　'; 
-echo '<a href="exam.php">開始考試</a>　　<br><br>';
-echo '你好!　'.$row[0].'<br>';
+
 
 
 
@@ -27,6 +25,11 @@ if($_SESSION['userID'] != null)
 {
        
        
+		echo '<form action="exam.php" method="post" name="form1">'; 
+		 echo '<a href="logout.php">登出</a>　　　'; 
+        echo '<input name="startexam" type="submit" value="開始考試"><br><br>';
+		echo '</form>'; 
+        echo '你好!　'.$row[0].'<br>';
       
 		
 		
@@ -51,7 +54,7 @@ if($_SESSION['userID'] != null)
 }
 else
 {
-        echo '您無權限觀看此頁面!';
+        echo '請先登入帳號密碼 ^_^';
         echo '<meta http-equiv=REFRESH CONTENT=3;url=home.php>';
 }
 ?>
