@@ -63,7 +63,8 @@ if($_SESSION['userID'] != null)
         while($row = mysql_fetch_row($result))
         {
             echo "<tr>";
-		    echo "<td>".$i."　</td><td>$row[1]　</td><td>$row[4]　</td><td>$row[5]　</td>";
+			$sup = "onclick='deletscore(b3)'";
+		    echo "<td>".$i."　</td><td>$row[1]　</td><td>$row[4]　</td><td>$row[5]　</td><td><a $sup>重考</a></td>";
 			echo "</tr>";
             $i = $i+1;
         }
@@ -81,16 +82,33 @@ else
 <script>
 function delet()
 {
-   if(confirm("你確定要刪除　<?php echo $name; ?>　考卷?\n這會連成績一起刪除"))
-   {
+   if(confirm("你確定要刪除　<?php echo $name; ?>　考卷?\n這會連成績一起刪除")) {
+   document.location.href="<?php echo 'deletexam.php?select='.$id; ?>";
+   }
+   else  {  }
+}
 
-    document.location.href="<?php echo 'deletexam.php?select='.$id; ?>";
+
+
+var strFun = "delectscore";
+var strParam = "<?php ?>";
+ 
+//Create the function call from function name and parameter.
+var funcCall = strFun + "('" + strParam + "');";
+ 
+//Call the function
+var ret = eval(funcCall);
+//How to turn a String into a javascript function
+
+
+function deletscore(a)
+{
+   if(confirm("你確定要刪除　"+a+"　的分數嗎?")) {
+
+  
 	
    }
-   else
-   {
-  
-   }
+   else  {  }
 }
 </script>
 
