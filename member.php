@@ -8,10 +8,10 @@
 <style>
  
   div.show{
-  background-color:#AFD6FF; 
+  background-color:#CDE5FF; 
   width:90%; 
   height:75%; 
-  opacity: 0.8;
+  opacity: 1;
   padding:15px;
   position:relative; 
   box-shadow: 10px 10px 10px #888888;

@@ -8,10 +8,10 @@
 <style>
 
   div.show{
-  background-color:#AFD6FF; 
+  background-color:#CDE5FF; 
   width:80%; 
    
-  opacity: 0.8;
+  opacity: 1;
   padding:15px;
   position:relative; 
   box-shadow: 8px 8px 10px #888888;
@@ -24,19 +24,28 @@
 if ($_POST["startexam"]=="開始考試") {
 //考試授權
 
-
 include("mysql_connect.inc.php");
 
-	 echo  "<br><h2>　　隨機題目：</h2><br>";
+        $name = $_SESSION['exam_name'];
+
+        $sql = "SELECT * FROM exam where name = '$name'";
+        $result = mysql_query($sql);
+        $row = mysql_fetch_row($result);
+
+		$kind = $row[3];
+		$much = $row[4];
+		//抓取考卷資料
+		
+	 echo  "<br><h2>　　".$name."：</h2><br>";
 				
      echo '<div class="show">';
         $NO = 1;
 	    $_SESSION[ans] = array();
-        //尾端數字是題目數量
-        $sql = "select * from question order by RAND() limit 0,5";
+        //抓取題目總類 尾端數字是題目數量
+        $sql = "select * from question where kind = '$kind' order by RAND() limit 0,$much";
         $result = mysql_query($sql);
 		
-		echo "<form action='exam2.php' method='POST'>";
+		echo "<form action='exam2.php?much=$much' method='POST'>";
 
         while($row = mysql_fetch_row($result))
         {

@@ -6,10 +6,10 @@
 <style>
  
   div.show{
-  background-color:#AFD6FF; 
+  background-color:#CDE5FF; 
   width:90%; 
   height:75%; 
-  opacity: 0.8;
+  opacity: 1;
   padding:15px;
   position:relative; 
   box-shadow: 10px 10px 10px #888888;
@@ -25,6 +25,8 @@
 if ($_POST["answer1"]!=null) {
 //判斷到底有沒有考試
 
+$much = $_GET["much"];
+
 echo  "<br><h2>　　測驗結果：</h2><br>";
 				
 echo '<div class="show">';
@@ -32,13 +34,13 @@ include("mysql_connect.inc.php");
 
 $choice = array();
 
-        for($i=1;$i<=5;$i++){
+        for($i=1;$i<=$much;$i++){
             $choice[$i] = $_POST['answer'.$i];
 
         }
 $error = 0;
 $score = 100;
-        for($j=1;$j<=5;$j++){
+        for($j=1;$j<=$much;$j++){
 		   echo"第 ".$j." 題--";
            echo" 你得答案 ".$choice[$j];
            echo" 正確答案 ".$_SESSION[ans][$j]."<br>";
@@ -56,7 +58,8 @@ $score = 100;
 	
 	$id = $_SESSION['userID'];
 	$date = date("Y-m-d H:i:s");
-	$sql = "insert into score (userID, date, about, error, score) values ('$id', '$date', '測試考試', '$error', '$score')";
+	$name = $_SESSION['exam_name'];
+	$sql = "insert into score (userID, date, name, error, score) values ('$id', '$date', '$name', '$error', '$score')";
 	mysql_query($sql);
 
 echo '</div>';

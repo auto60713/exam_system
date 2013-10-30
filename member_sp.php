@@ -4,6 +4,22 @@
 
 
 <html>
+
+<style>
+ 
+  div.show{
+  background-color:#F5EBFF; 
+  width:90%; 
+  height:75%; 
+  opacity: 1;
+  padding:15px;
+  position:relative; 
+  box-shadow: 10px 10px 10px #888888;
+  left:2%;
+
+ }
+</style> 
+
 <body>
 <?php
 include("mysql_connect.inc.php");
@@ -14,7 +30,10 @@ $row = @mysql_fetch_row($result);
 
 
 echo '<h4>管理員首頁</h4>';
-echo '<a href="logout.php">登出</a>　　'; 
+echo '　　<a href="logout.php">登出</a>　　'; 
+echo '<a href="addexam.php">新增考卷</a>　　<br><br>'; 
+
+echo '<div class="show">';
 echo '你好!　'.$row[0].'<br>';
 
 
@@ -29,24 +48,31 @@ if($_SESSION['userID'] != null && $_SESSION['super'] == 1)
       
 		
 		
-	    echo  "<h3>成員們的成績：<br></h3>";
+	    echo  "<h3>考卷列表：<br></h3>";
 				
     
         //將資料庫裡的所有會員資料顯示在畫面上
         $sql = "SELECT * FROM exam";
         $result = mysql_query($sql);
 		
-		   echo "<table border='1'>";	
+  		    echo "<table border='1'>";	
             echo "<tr>";
 		    echo "<th>考試代號</th><th>日期</th><th>名稱</th><th>總類</th><th>題數</th><th>狀態</th>";
-			echo "</tr>";		   
+			echo "</tr>";		  
+		$i =0;	
         while($row = mysql_fetch_row($result))
         {
             echo "<tr>";
-		    echo "<td>$row[0]　</td><td>$row[1]　</td><td>$row[2]　</td><td>$row[3]　</td><td>$row[4]　</td><td>$row[5]　</td>";
+		    echo "<td>$row[0]　</td><td>$row[1]　</td><td><a href ='readexam.php?select=$row[0]'>$row[2]</a>　</td><td>$row[3]　</td><td>$row[4]　</td><td>$row[5]　</td>";
 			echo "</tr>";
+			
+			//只顯示20筆資料
+			$i = $i+1;
+			if($i>20)
+            exit;
         }
 	       echo "</table>";
+		   echo '</div">';
 }
 else
 {

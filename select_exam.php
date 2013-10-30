@@ -8,10 +8,10 @@
 <style>
  
   div.show{
-  background-color:#AFD6FF; 
+  background-color:#CDE5FF; 
   width:90%; 
   height:75%; 
-  opacity: 0.8;
+  opacity: 1;
   padding:15px;
   position:relative; 
   box-shadow: 10px 10px 10px #888888;
@@ -82,6 +82,7 @@ if($_SESSION['userID'] != null)
         }
 	       echo "</table><br>";
 		   echo "你選擇了　<h4>".$_GET['select']."</h4>";
+		   $_SESSION['exam_name'] = $_GET['select'];
 		   echo '</div>';
 }
 
