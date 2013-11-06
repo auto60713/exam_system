@@ -60,13 +60,17 @@ if($_SESSION['userID'] != null)
 			echo "</tr>";		
 
    		$i = 1;
+		$AP = array();
         while($row = mysql_fetch_row($result))
         {
             echo "<tr>";
-			$sup = "onclick='deletscore(b3)'";
-		    echo "<td>".$i."　</td><td>$row[1]　</td><td>$row[4]　</td><td>$row[5]　</td><td><a $sup>重考</a></td>";
+		    echo "<td>".$i."　</td><td>$row[1]　</td><td>$row[4]　</td><td>$row[5]　</td><td onclick='call()'>重考</td>";
 			echo "</tr>";
+			
+			$AP[$i] = $row[1];
+			echo "<input type='text' name='functionCall' size='50' value='$AP[$i]'/>";
             $i = $i+1;
+			
         }
 	       echo "</table>";
 		   echo '</div>';
@@ -88,27 +92,16 @@ function delet()
    else  {  }
 }
 
-
-
-var strFun = "delectscore";
-var strParam = "<?php ?>";
- 
-//Create the function call from function name and parameter.
-var funcCall = strFun + "('" + strParam + "');";
- 
-//Call the function
-var ret = eval(funcCall);
-//How to turn a String into a javascript function
+function call(){
+var functionCall = "deletscore('"+document.forms[0].functionCall.value+"')";
+eval(functionCall);
+}
 
 
 function deletscore(a)
 {
-   if(confirm("你確定要刪除　"+a+"　的分數嗎?")) {
-
+   alert("你確定要刪除　"+a+"　分數?");
   
-	
-   }
-   else  {  }
 }
 </script>
 
